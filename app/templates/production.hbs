@@ -1,0 +1,11 @@
+<h2>Production route's header</h2>
+
+
+<label>Product ID : </label>{{model.[10].ProductID}}<br>
+<label>Product Name : </label>{{model.[10].ProductName}}<br>
+<label>Dimension ID : </label>{{model.[18].DimensionID}}<br>
+<label>Dimension Name: </label> {{#link-to 'production.dimension'}} {{model.[61].DimensionName}} {{/link-to}} <br>
+
+{{pikaday-input format="mm/dd/yyyy"}}
+
+{{outlet}}
