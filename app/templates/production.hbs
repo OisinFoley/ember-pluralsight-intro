@@ -1,11 +1,17 @@
 <h2>Production route's header</h2>
 
+{{!--
+<label>Product  : </label>{{model.[10].ProductName}}<br>
+<label>Dimension : </label> {{#link-to 'production.dimension' model.[10].DimensionName  }}{{model.[10].DimensionName}}{{/link-to}} <br>
+<label>Boards : </label>{{model.[10].BoardsSum}}<br>
+<label>BoardFeet: </label>{{model.[10].BoardFeetSum}}<br>
+--}}
 
-<label>Product ID : </label>{{model.[10].ProductID}}<br>
-<label>Product Name : </label>{{model.[10].ProductName}}<br>
-<label>Dimension ID : </label>{{model.[18].DimensionID}}<br>
-<label>Dimension Name: </label> {{#link-to 'production.dimension'}} {{model.[61].DimensionName}} {{/link-to}} <br>
+{{!--  {{#each model as |product|}}
+  This product's dimensions are : {{product.DimensionName}} <br>
+{{/each}} --}}
 
-{{pikaday-input format="mm/dd/yyyy"}}
+<br><br>
+{{!--  {{pikaday-input format="mm/dd/yyyy"}} --}} <br>
 
 {{outlet}}

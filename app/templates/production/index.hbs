@@ -1,0 +1,52 @@
+{{!--
+  <label>Product  : </label>{{model.[10].ProductName}}<br>
+  <label>Dimension : </label> {{#link-to 'production.dimension' model.[10].DimensionName  }}{{model.[10].DimensionName}}{{/link-to}} <br>
+  <label>Boards : </label>{{model.[10].BoardsSum}}<br>
+  <label>BoardFeet: </label>{{model.[10].BoardFeetSum}}<br>
+--}}
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Dimensions</th>
+    <th>Boards</th>
+    <th>BoardFeet</th>
+    <th>{{fa-icon "cogs"}}</th>
+  </tr>
+
+  </thead>
+  <tbody>
+  {{#each model as |row|}}
+  <!--we can't use an operand during the check, but we can use truthy falsy checks to see if the value is > 0...
+      a value of zero would be falsy(along with null, undefined, empty array etc..),
+      so we apply the class of zero which gives it the gray colour we see -->
+
+  <!--we're also now nesting an expression, checking greater than 10, resulting in gray for anything < 10-->
+    {{!-- <tr class="{{if (lt row.BoardsSum 10 && gt row.BoardsSum 5) "" "zero"}}"> --}}
+    {{!--  <tr class="{{if (lt row.BoardsSum 10) (if (gt row.BoardsSum 5) ) "" "zero"}}"> --}}
+    {{!--  <tr class="{{if (lt row.BoardsSum 10) if (gt row.BoardsSum 5)  "" "zero"}}"> --}}
+    {{!-- <tr class="{{if (gt row.BoardsSum 10 ) "" "zero"}}"> --}}
+    <tr class="{{row-class row}}">
+
+
+
+<td>
+      {{#link-to 'production.dimension' row.DimensionID}}
+        {{log row.DimensionName.length}}
+        {{row.DimensionName.length}}
+      {{/link-to}}
+    </td>
+    <td class="quantity">{{row.BoardsSum}}</td>
+
+
+
+    <!--here, precision is what we call a named parameter - we're using ember-accounting addon for this-->
+    <td class="quantity">{{format-number row.BoardFeetSum precision=2}}</td>
+    <td><input type="checkbox" disabled={{eq row.BoardsSum 0}}></td>
+
+      {{!-- {{debugger}} --}}
+
+  </tr>
+{{/each}}
+</tbody>
+</table>
