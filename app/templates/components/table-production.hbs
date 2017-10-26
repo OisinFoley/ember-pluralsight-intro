@@ -8,10 +8,14 @@
 
   <thead>
   <tr>
-    <th>Dimensions</th>
+    {{!-- <th>Dimensions</th>
     <th>Boards</th>
-    <th>BoardFeet</th>
-    <th>{{fa-icon "cogs"}}</th>
+    <th>BoardFeet</th> --}}
+    {{table-th name="Dimension"}}
+    {{table-th name="Boards"}}
+    {{table-th name="BoardFeet"}}
+    {{!-- <th>{{fa-icon "cogs"}}</th> --}}
+    {{#table-th}}{{fa-icon "cogs"}}{{/table-th}}
     <th>Volume</th>
   </tr>
 
@@ -57,7 +61,13 @@
       <!--//replacing the above with a macro from our /models/production.js file-->
 
       <td class="quantity">{{format-number row.boardfeet precision=2}}</td>
-      <td><input type="checkbox" disabled={{eq row.BoardsSum 0}}></td>
+      {{!-- <td><input type="checkbox" disabled={{eq row.BoardsSum 0}}></td> --}}
+      <td>
+        {{#link-to 'production.dimension' row.DimensionID}}
+          {{fa-icon 'search'}}
+        {{/link-to}}
+      </td>
+
       <td> {{row.volume}}  </td>
 
       {{!-- {{debugger}} --}}

@@ -1,0 +1,15 @@
+{{!-- {{name}} --}}
+{{!-- we could just use name to take the name keys being passed when we call this template in table-production.hbs --}}
+{{!-- but then we can't use the font awesome cog icon as part of our table headers, the actual text inside the braces will render instead --}}
+{{!-- so we use yield which gives control of what's inside a {{table-th}} block to this table-th's .js file, which performs the
+logic and calculations, thus rendering as hoped --}}
+
+{{!-- using yield on its own causes rendering issues, because some expressions in the table-production component are inline, and the cog icon uses a block, so let's do an if check, and act accordingly. remember we used name when we only needed to use an inline earlier, hence its presence below  --}}
+
+{{#if hasBlock}}
+	{{yield}}
+{{else}}
+	{{name}}	
+{{/if}}
+
+

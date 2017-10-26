@@ -1,4 +1,4 @@
-<h2>Production route's header</h2>
+
 
 {{!--
 <label>Product  : </label>{{model.[10].ProductName}}<br>
@@ -12,6 +12,35 @@
 {{/each}} --}}
 
 <br><br>
-{{!--  {{pikaday-input format="mm/dd/yyyy"}} --}} <br>
+
+<header class="details">
+	<span>
+		<form {{action 'loadData' on='submit'}}>	
+			<p>
+				Start Date : {{pikaday-input value=start_date format="mm/dd/yyyy"}} <br>
+			</p>
+				 
+			<p>
+				End Date : {{pikaday-input value=end_date format="mm/dd/yyyy"}} <br>
+			</p>
+
+			<p>
+				Start Time : {{input value=start_time	}}
+			</p>
+
+			<p>
+				End Time : {{input value=end_time	}}
+			</p>
+
+			<p>
+				<button type='submit'>Load Data</button>
+			</p>
+		</form>
+	</span>
+</header>
+	
+
+<h2>Production</h2>
+ 
 
 {{outlet}}
