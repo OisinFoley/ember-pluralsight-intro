@@ -13,34 +13,18 @@
 
 <br><br>
 
-<header class="details">
-	<span>
-		<form {{action 'loadData' on='submit'}}>	
-			<p>
-				Start Date : {{pikaday-input value=start_date format="mm/dd/yyyy"}} <br>
-			</p>
-				 
-			<p>
-				End Date : {{pikaday-input value=end_date format="mm/dd/yyyy"}} <br>
-			</p>
+{{loopy-loader start_date=start_date end_date=end_date start_time=start_time end_time=end_time
+load=(route-action 'loadData') }}
 
-			<p>
-				Start Time : {{input value=start_time	}}
-			</p>
 
-			<p>
-				End Time : {{input value=end_time	}}
-			</p>
+<h2>
+  {{#link-to 'production' start end}}
+    <!--these values are set to update as their updated in the view-model-->
+  <!--using unbound means you would have to tell it to update to the new value through the .js file-->
+    Production From {{unbound start_time}} to {{unbound end_time}}
+  {{/link-to}}
 
-			<p>
-				<button type='submit'>Load Data</button>
-			</p>
-		</form>
-	</span>
-</header>
-	
+</h2>
 
-<h2>Production</h2>
- 
 
 {{outlet}}

@@ -1,0 +1,26 @@
+<header class="details">
+	<span>
+		<form {{action 'loadData' on="submit"}}>
+			<p>
+				Start Date : {{pikaday-input value=start_date format="DD/MM/YYYY"}} <br>
+			</p>
+
+			<p>
+				End Date : {{pikaday-input value=end_date format="DD/MM/YYYY"}} <br>
+        {{log end_date}}
+			</p>
+
+			<p>
+				Start Time : {{input value=start_time	}}
+			</p>
+
+			<p>
+				End Time : {{input value=end_time	}}
+			</p>
+
+			<p>
+				<button type="submit">loadData</button>
+			</p>
+		</form>
+	</span>
+</header>

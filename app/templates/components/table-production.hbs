@@ -11,9 +11,9 @@
     {{!-- <th>Dimensions</th>
     <th>Boards</th>
     <th>BoardFeet</th> --}}
-    {{table-th name="Dimension"}}
-    {{table-th name="Boards"}}
-    {{table-th name="BoardFeet"}}
+    {{table-th name="Dimension" current_sort=sort_by sort_by="default" sort_data=(action 'sort_data') }}
+    {{table-th name="Boards"    current_sort=sort_by sort_by="boards" sort_data=(action 'sort_data')}}
+    {{table-th name="BoardFeet" current_sort=sort_by sort_by="boardfeet" sort_data=(action 'sort_data')}}
     {{!-- <th>{{fa-icon "cogs"}}</th> --}}
     {{#table-th}}{{fa-icon "cogs"}}{{/table-th}}
     <th>Volume</th>
@@ -26,7 +26,7 @@
     <td>{{total_boards}}</td>
     <td>{{format-number total_boardfeet precision=2}}</td>
   </tr>
-  {{#each model as |row|}}
+  {{#each sorted_model as |row|}}
     <!--we can't use an operand during the check, but we can use truthy falsy checks to see if the value is > 0...
         a value of zero would be falsy(along with null, undefined, empty array etc..),
         so we apply the class of zero which gives it the gray colour we see -->
@@ -46,7 +46,7 @@
         {{#link-to 'production.dimension' row.DimensionID}}
           {{row.DimensionName}}
         {{/link-to}}
-        {{log row.DimensionName.length}}
+        {{!-- {{log row.DimensionName.length}} --}}
       </td>
       <!--because we've started using a named computed property in /models/production.js
       we can now stop using this awkward property name from the JSON file -> BoardsSum

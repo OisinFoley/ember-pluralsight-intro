@@ -3,7 +3,7 @@
 
 import Ember from 'ember';
 // import Production from '../models/production';
-import Production from 'loopylog/models/production';
+// import Production from 'loopylog/models/production';
 import moment from 'moment';
 
 // const{
@@ -35,24 +35,28 @@ export default Ember.Route.extend({
     this.set('params', params); //this gets the datetime params from the url route, into our template. will populate inputs onload
 
 
-    return new Promise(function(resolve) {
-        setTimeout(function () {
-          // let data = Ember.$.getJSON('/data/production.json?start=${params.start}&end=${params.end}');
-          let data = Ember.$.getJSON('/data/production.json?stars_at=${params.start}&ends_at=${params.end}');
-          data.then(function(result){
-            let records = [];
-            result.forEach(function(item){
-              records.push( Production.create(item) );
-            });
-            resolve(records);
-          })
-
-
-          //with updated callback, we don't use this resolve anymore, it's returned in new position shown above
-          // resolve(data);
-        }, 400);
-      });
+      // return new Promise(function(resolve) {
+      //     setTimeout(function () {
+      //       // let data = Ember.$.getJSON('/data/production.json?start=${params.start}&end=${params.end}');
+      //       let data = Ember.$.getJSON('/data/production.json?stars_at=${params.start}&ends_at=${params.end}');
+      //       data.then(function(result){
+      //         let records = [];
+      //         result.forEach(function(item){
+      //           records.push( Production.create(item) );
+      //         });
+      //         resolve(records);
+      //       })
+      //
+      //
+      //       //with updated callback, we don't use this resolve anymore, it's returned in new position shown above
+      //       // resolve(data);
+      //     }, 400);
+      //   });
+        return this.get('mystore').production(params.start, params.end);
       },
+      //this is the equivalent of the above import something from 'local or relative/path'
+      // mystore: Ember.inject.service('mystore'),
+  //use of initializer means we can remove this ^
 
       //the following let's you customise what's going to be available through the controller before rendering
       //remember because a CTRL module is deprecated, this routes file, (or alternatively a component) now act
@@ -67,12 +71,30 @@ export default Ember.Route.extend({
         controller.set('start',params.start) //start is in router.js, param.start is localhost:4200/start/to/ etc...
         controller.set('end', params.end);
 
-        controller.set('start_date', moment(new Date(params.start)).format('mm/dd/yyyy'));
-        controller.set('end_date', moment(new Date(params.end)).format('mm/dd/yyyy'));
-        controller.set('start_time', moment(new Date(params.start)).format('HH:mm'));
-        controller.set('end_time', moment(new Date(params.end)).format('HH:mm'));
+        // controller.set('start_date', moment(new Date(params.start)).format('mm/dd/yyyy'));
+        // controller.set('end_date', moment(new Date(params.end)).format('mm/dd/yyyy'));
+
+        controller.set('start_date', moment(new Date(params.start)).format('MM/DD/YYYY'));
+        controller.set('end_date', moment(new Date(params.end)).format('MM/DD/YYYY'));
+
+        console.log(params.end.toString());
+
+        let start_time_hours = params.start.split(' ');
+        console.log("start time hours is : %s",start_time_hours[1]);
+
+        controller.set('start_time', moment(new Date(params.start)).format('HH:MM'));
+        controller.set('end_time', moment(new Date(params.end)).format('HH:MM'));
 
         //error somewhere in code from following video 10.4, made it as far as 2:50
-      }
+      },
+
+        actions:{
+          // loadData: function(){
+          loadData(url){
+
+            console.log("Load action fired");
+            this.transitionTo(url);
+          }
+        }
   });
 
